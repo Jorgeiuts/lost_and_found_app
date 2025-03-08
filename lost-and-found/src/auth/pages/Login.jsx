@@ -1,8 +1,16 @@
-import '/assets/css/login.css'
+import { useNavigate } from 'react-router-dom'
+import '/assets/css/styles.css'
 
 export const Login = () => {
+
+  const navigate = useNavigate();
+
+  const onLogin = () => {
+    navigate('/home')
+  }
+
   return (
-    <div className="container-fluid row">
+    <div className="container-fluid d-flex p-0">
       <div className="col-md-5 left-panel">
         <img src="/assets/logos/logo_liceo_bco.png" alt="Logo Liceo del Valle"/>
       </div>
@@ -19,7 +27,7 @@ export const Login = () => {
                     <input type="password" className="hbox" placeholder="Contraseña"/>
                 </div>
                 <div className="container d-flex justify-content-end">
-                    <button type="submit" className="btn btn-primary">Iniciar sesión</button>
+                    <button onClick={ onLogin } type="submit" className="btn btn-primary">Iniciar sesión</button>
                 </div>
         </form>
       </div>

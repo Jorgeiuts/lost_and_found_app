@@ -6,8 +6,8 @@ export const AppRouter = () => {
   return (
     <>
         <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="lostObjects" element={<LostObjectsRouter />} />
+            <Route path="login" element={<Login />} />
+            <Route path="/*" element={<LostObjectsRouter />} />
         </Routes>
     </>
   )

@@ -1,5 +1,5 @@
 export const NotificationObjectPage = () => {
   return (
-    <div>NotificationObjectPage</div>
+    <h1>Notification Object Page</h1>
   )
 }

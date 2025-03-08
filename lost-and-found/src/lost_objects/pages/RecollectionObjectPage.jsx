@@ -1,5 +1,5 @@
 export const RecollectionObjectPage = () => {
   return (
-    <div>RecollectionObjectPage</div>
+    <h1>Recollection Object Page</h1>
   )
 }

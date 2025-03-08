@@ -1,5 +1,5 @@
 export const ReportObjectPage = () => {
   return (
-    <div>ReportObjectPage</div>
+    <h1>Report Object Page</h1>
   )
 }
