@@ -178,6 +178,12 @@
     color: var(--secondary-dark-red);
 }
 /* Home */
-.name-home {
-    color: var(--secondary-light);
+.primary-txt-custom {
+    font-size: 1.5rem;
+    font-family: 'Kanit-BlackItalic';
+    color: var(--primary-dark-blue);
+}
+.text-info-custom {
+    font-family: 'Kanit-Italic';
+    color: var(--primary-dark-blue);
 }
