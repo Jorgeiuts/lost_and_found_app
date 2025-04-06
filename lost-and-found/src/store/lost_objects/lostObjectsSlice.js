@@ -7,7 +7,7 @@ export const lostObjectsSlice = createSlice({
    },
    reducers: {
        increment: (state, /* action */ ) => {
-           state.counter += 1;
+           state.counter += 0;
        },
    }
 });
