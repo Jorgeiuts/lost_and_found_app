@@ -1,7 +1,9 @@
 import QRcode from 'qrcode';
 import { useState } from 'react';
+import { useLostObjectStore } from '../../hooks/useLostObjectStore';
 
 export const QRgenerator = () => {
+  const { getQrs } = useLostObjectStore();
   const [qrs, setQrs] = useState(0);
   const [qrImages, setQrImages] = useState([]);
 
@@ -13,13 +15,15 @@ export const QRgenerator = () => {
 
   const onGenerate = async () => {
     try {
+      const data = await getQrs(qrs);
+      console.log(data);
       const cantidad = parseInt(qrs, 10);
       const selectedIds = ids.slice(0, cantidad);
 
       const generatedQrs = await Promise.all(
-        selectedIds.map(async (id) => {
-          const qr = await QRcode.toString(id, { type: 'svg', width: 150 }); // Definir un tamaño fijo para los QRs
-          return { id, qr };
+        data.map(async (qrGenerated) => {
+          const qr = await QRcode.toString(qrGenerated.qrValue, { type: 'svg', width: 150 }); // Definir un tamaño fijo para los QRs
+          return { id: qrGenerated.id, qr };
         })
       );
 
@@ -67,60 +71,62 @@ export const QRgenerator = () => {
   };
 
   return (
-    <div className="row p-4">
-      <div className="col">
-        <div className="card">
-          <div className="card-body">
-            <p className="text-info-custom">Por favor digite la cantidad de QR que necesites generar:</p>
+    <div className="container h-100 d-flex flex-column">
+      <div className="row p-4">
+        <div className="col">
+          <div className="card">
+            <div className="card-body">
+              <p className="text-info-custom">Por favor digite la cantidad de QR que necesites generar:</p>
 
-            <div className="input-wrapper d-flex align-items-center">
-              <img className="icons" src="/assets/icons/icon_qr.png" alt="" />
+              <div className="input-wrapper d-flex align-items-center">
+                <img className="icons" src="/assets/icons/icon_qr.png" alt="" />
 
-              <input
-                type="number"
-                className="hbox"
-                placeholder="Cantidad de códigos QR"
-                onChange={onValueChange}
-                value={qrs}
-              />
-              <i className="bi bi-qr-code-scan"></i>
-            </div>
-
-            <button className="btn btn-primary mt-3" onClick={onGenerate}>
-              Generar
-            </button>
-
-            {/* Mostrar los QR generados en Grid con Scroll */}
-            <div className="mt-4" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
-                  gap: '20px',
-                }}
-              >
-                {qrImages.map(({ qr }, index) => (
-                  <div
-                    key={index}
-                    style={{
-                      textAlign: 'center',
-                      padding: '10px',
-                      border: '1px solid #eee',
-                      borderRadius: '8px',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                    }}
-                  >
-                    {/* Mostrar solo el QR sin el texto ID */}
-                    <div dangerouslySetInnerHTML={{ __html: qr }} />
-                  </div>
-                ))}
+                <input
+                  type="number"
+                  className="hbox"
+                  placeholder="Cantidad de códigos QR"
+                  onChange={onValueChange}
+                  value={qrs}
+                />
+                <i className="bi bi-qr-code-scan"></i>
               </div>
-            </div>
 
-            {/* Botón para descargar el archivo SVG */}
-           {qrImages.length > 0  && <button className="btn btn-primary mt-3" onClick={downloadSVG}>
-              Descargar archivo SVG
-            </button>}
+              <button className="btn btn-primary mt-3" onClick={onGenerate}>
+                Generar
+              </button>
+
+              {/* Mostrar los QR generados en Grid con Scroll */}
+              <div className="mt-4" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+                    gap: '20px',
+                  }}
+                >
+                  {qrImages.map(({ qr }, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        textAlign: 'center',
+                        padding: '10px',
+                        border: '1px solid #eee',
+                        borderRadius: '8px',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                      }}
+                    >
+                      {/* Mostrar solo el QR sin el texto ID */}
+                      <div dangerouslySetInnerHTML={{ __html: qr }} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Botón para descargar el archivo SVG */}
+            {qrImages.length > 0  && <button className="btn btn-primary mt-3" onClick={downloadSVG}>
+                Descargar archivo SVG
+              </button>}
+            </div>
           </div>
         </div>
       </div>

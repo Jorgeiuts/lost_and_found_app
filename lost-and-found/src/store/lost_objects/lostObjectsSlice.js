@@ -3,15 +3,17 @@ import { createSlice } from '@reduxjs/toolkit';
 export const lostObjectsSlice = createSlice({
    name: 'lostObjects',
    initialState: {
-       counter: 10
+       qrs: []
    },
    reducers: {
-       increment: (state, /* action */ ) => {
-           state.counter += 0;
-       },
+       onGenerateQrs: ( state, {payload} ) => {
+            state.qrs.push( payload )
+       }
    }
 });
 
 
 // Action creators are generated for each case reducer function
-export const { increment } = lostObjectsSlice.actions;
+export const { 
+    onGenerateQrs
+ } = lostObjectsSlice.actions;

@@ -53,6 +53,11 @@
     --text-color-primary: #102E67;
     --text-color-secondary: #2E3192;
 }
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
 /* Login */
 .bkg-login {
     background-color: var(--secondary-light);
