@@ -31,21 +31,6 @@ export const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="row p-4">
-        <div className="col">
-          <div className="card">
-            <div className="card-body">
-            <p className="text-info-custom">Por favor digite la cantidad de QR que necesites generar:</p>
-            <div className="input-wrapper d-flex align-items-center">
-                        <img className="icons" src="/assets/icons/icon_qr.png" alt="" />
-                        <input type="number" className="hbox" placeholder="Cantidad de códigos QR" />
-                        <i className="bi bi-qr-code-scan"></i>
-                    </div>
-                    <button className="btn btn-primary mt-3">Generar</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
