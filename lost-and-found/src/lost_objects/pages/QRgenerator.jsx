@@ -1,6 +1,6 @@
 import QRcode from 'qrcode';
 import { useState } from 'react';
-import { useLostObjectStore } from '../../hooks/useLostObjectStore';
+import { useLostObjectStore } from '../../hooks';
 
 export const QRgenerator = () => {
   const { getQrs } = useLostObjectStore();
