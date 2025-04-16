@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { HomePage, LostItemRegisterPage, NotificationObjectPage, RecollectionObjectPage, ReportObjectPage } from '../pages'
+import { HomePage, LostItemRegisterPage, NotificationObjectPage, RecollectionObjectPage, ReportObjectPage, QRgenerator } from '../pages'
 import { SideBar } from "../../ui";
-import { QRgenerator } from "../pages/QRgenerator";
 
 export const LostObjectsRouter = () => {
   return (

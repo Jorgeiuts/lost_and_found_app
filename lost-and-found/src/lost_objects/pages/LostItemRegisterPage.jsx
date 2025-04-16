@@ -1,4 +1,4 @@
-import { useForm, useLostObjectStore } from "../../hooks"
+import { useForm, useLostObjectStore } from "../../hooks";
 import Swal from 'sweetalert2';
 
 const registerObjectForm = {

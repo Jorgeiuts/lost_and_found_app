@@ -9,16 +9,14 @@ export const QRgenerator = () => {
 
   const ids = ['1', '2', '3', '4', '5', '6', '7'];
 
-  const onValueChange = (e) => {
-    setQrs(e.target.value);
+  const onValueChange = ({target}) => {
+    setQrs(target.value);
   };
 
   const onGenerate = async () => {
     try {
       const data = await getQrs(qrs);
       console.log(data);
-      const cantidad = parseInt(qrs, 10);
-      const selectedIds = ids.slice(0, cantidad);
 
       const generatedQrs = await Promise.all(
         data.map(async (qrGenerated) => {

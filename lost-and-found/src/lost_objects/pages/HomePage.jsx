@@ -1,4 +1,4 @@
-import '/assets/css/home.css'
+import '/assets/css/home.css';
 
 export const HomePage = () => {
   return (
