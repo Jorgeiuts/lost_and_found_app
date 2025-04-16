@@ -12,7 +12,7 @@ export const LostObjectsRouter = () => {
         
         <div className="flex-grow-1 p-1">
           <Routes>
-              <Route path="/" element={<Navigate to="/home" /> } replace />
+              <Route path="*" element={<Navigate to="/home" />} />
               <Route path="home" element={<HomePage />} />
               <Route path="lostItem" element={<LostItemRegisterPage />} />
               <Route path="notificationObject" element={<NotificationObjectPage />} />
