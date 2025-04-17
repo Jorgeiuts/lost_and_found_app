@@ -7,13 +7,14 @@ export const useAuthStore = () => {
     const { isAuthenticated, user, error } = useSelector( state => state.auth );
     const dispatch = useDispatch();
 
-    const startLogin = async( email, password ) => {
+    const startLogin = async( {email, password} ) => {
         dispatch( onChecking() );
         try {
+            console.log(email, password);
             const { data } = await lostAndFoundApi.post('/login', { email, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( onLogin( data.user ) );
+            dispatch( onLogin( {email: data.email} ) );
         } catch (error) {
             dispatch( onLogout( 'Credenciales incorrectas' ) );
             setTimeout(() => {

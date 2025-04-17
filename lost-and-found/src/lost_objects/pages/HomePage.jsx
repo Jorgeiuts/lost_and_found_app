@@ -1,13 +1,17 @@
+import { useAuthStore } from '../../hooks';
 import '/assets/css/home.css';
 
 export const HomePage = () => {
+
+  const { user } = useAuthStore();
+
   return (
     <div className="container h-100 d-flex flex-column">
       <div className="row p-3">
         <div className="col">
           <div className="card shadow-lg rounded">
             <div className="card-body text-center">
-              <h1 className="primary-txt-custom">¡Bienvenido!, Usuario</h1>
+              <h1 className="primary-txt-custom">¡Bienvenido!, { user?.email || 'Usuario' }</h1>
               <p className="text-info-custom">Gestiona los objetos perdidos de forma rápida y eficiente</p>
             </div>
           </div>
