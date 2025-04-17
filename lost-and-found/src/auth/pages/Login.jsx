@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { useForm, useAuthStore } from '../../hooks';
+import { sanitizeValidateEmail, sanitizeValidatePassword } from '../helpers';
 import '/assets/css/styles.css';
+import Swal from 'sweetalert2';
 
 const loginFormFields = {
   loginEmail: '',
@@ -14,8 +17,33 @@ export const Login = () => {
 
   const loginSubmit = ( event ) => {
     event.preventDefault();
-    startLogin({ email: loginEmail, password: loginPassword });
+
+    try {
+      const sanitizedEmail = sanitizeValidateEmail( loginEmail );
+      const sanitizedPassword = sanitizeValidatePassword( loginPassword );
+
+      startLogin({ email: sanitizedEmail, password: sanitizedPassword });
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error.message,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
   }
+
+  useEffect(() => {
+    if ( error !== undefined ) {
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
+  }, [error])
+  
 
   return (
     <div className="container-fluid d-flex p-0">

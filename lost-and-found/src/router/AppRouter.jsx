@@ -12,6 +12,22 @@ export const AppRouter = () => {
     checkAuthToken();
   }, [])
 
+  if ( isAuthenticated === 'checking' ) {
+    return (
+      <div 
+        className="d-flex justify-content-center align-items-center vh-100"
+        style={{ backgroundColor: '#132D67' }}
+      >
+        <img 
+          src="/assets/logos/logo_liceo_bco.png" 
+          alt="Logo Liceo del Valle"
+          className="img-fluid"
+          style={{ width: '200px' }}  
+        />
+      </div>
+    )
+  }
+
   return (
       <Routes>
           {

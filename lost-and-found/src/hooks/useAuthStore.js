@@ -10,7 +10,6 @@ export const useAuthStore = () => {
     const startLogin = async( {email, password} ) => {
         dispatch( onChecking() );
         try {
-            console.log(email, password);
             const { data } = await lostAndFoundApi.post('/login', { email, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime() );
