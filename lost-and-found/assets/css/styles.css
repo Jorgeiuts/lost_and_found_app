@@ -193,3 +193,9 @@ html, body {
     font-family: 'Kanit-Italic';
     color: var(--primary-dark-blue);
 }
+.invalid-feedback {
+    display: block;
+}
+.hbox.is-invalid {
+    border-bottom: 2px solid var(--primary-red);
+}

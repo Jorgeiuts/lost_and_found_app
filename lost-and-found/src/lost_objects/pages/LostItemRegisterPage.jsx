@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm, useLostObjectStore } from "../../hooks";
 import Swal from 'sweetalert2';
 
@@ -8,21 +9,54 @@ const registerObjectForm = {
   registerQrValue:     ''
 }
 
-export const LostItemRegisterPage = () => {
+const regiserObjectFormValidations = {
+  registerName: [ (value) => value.length >= 1, 'El nombre del objeto es obligatorio' ],
+  registerDescription: [ (value) => value.length >= 1, 'La descripcion del objeto es obligatoria' ],
+  registerEmail: [ (value) => value.includes('@liceodelvalle.edu.mx'), 'El correo electronico debe ser institucional' ],
+  registerQrValue: [ (value) => value.length === 36, 'El QR es obligatorio o esta incompleto' ] 
+}
 
-  const { registerName, registerDescription, registerEmail, registerQrValue, onInputChange, onResetForm } = useForm( registerObjectForm );
+export const LostItemRegisterPage = () => {
+  
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const { 
+    registerName, registerDescription, registerEmail, 
+    registerQrValue, onInputChange, onResetForm, 
+    ifFormValid, registerNameValid, registerDescriptionValid,
+    registerEmailValid, registerQrValueValid
+  } = useForm( registerObjectForm, regiserObjectFormValidations );
   const { startRegister } = useLostObjectStore();
 
   const registerSubmit = ( event ) => {
     event.preventDefault();
-    startRegister({ name: registerName, description: registerDescription, userEmail: registerEmail, qrValue: registerQrValue });
+    setFormSubmitted(true);
+
+    if (!ifFormValid) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor complete todos los campos correctamente.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      return;
+    }
+
+    startRegister({ 
+      name: registerName, 
+      description: registerDescription, 
+      userEmail: registerEmail, 
+      qrValue: registerQrValue 
+    });
     Swal.fire({
       title: '¡Registro exitoso!',
       text: 'Registro de objeto generado con exito',
       icon: 'success',
       confirmButtonText: 'Aceptar'
     });
+
     onResetForm();
+    setFormSubmitted(false);
   }
 
   return (
@@ -36,23 +70,24 @@ export const LostItemRegisterPage = () => {
                 <p className="text-info-custom">Porfavor complete los campos con la informacion requerida:</p>
                 <form className="w-100" onSubmit={ registerSubmit }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
+                      <div className="d-flex align-items-center w-100">
+                        <img className="icons me-2" src="/assets/icons/icon_docs.png" alt="" />
+                        <input 
+                          type="text" 
+                          className={`hbox ${ registerNameValid && formSubmitted ? 'is-invalid' : '' }`}
+                          placeholder="Nombre del objeto" 
+                          name="registerName"
+                          value={ registerName }
+                          onChange={ onInputChange }
+                        />
+                        <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
+                      </div>
+                      { registerNameValid && formSubmitted && <small className="invalid-feedback">{ registerNameValid }</small> }
                     <div className="d-flex align-items-center w-100">
                       <img className="icons me-2" src="/assets/icons/icon_docs.png" alt="" />
                       <input 
                         type="text" 
-                        className="hbox" 
-                        placeholder="Nombre del objeto" 
-                        name="registerName"
-                        value={ registerName }
-                        onChange={ onInputChange }
-                      />
-                      <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
-                    </div>
-                    <div className="d-flex align-items-center w-100">
-                      <img className="icons me-2" src="/assets/icons/icon_docs.png" alt="" />
-                      <input 
-                        type="text" 
-                        className="hbox" 
+                        className={`hbox ${ registerDescriptionValid && formSubmitted ? 'is-invalid' : '' }`} 
                         placeholder="Descripcion del objeto" 
                         name="registerDescription"
                         value={ registerDescription }
@@ -60,11 +95,12 @@ export const LostItemRegisterPage = () => {
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
+                    { registerDescriptionValid && formSubmitted && <small className="invalid-feedback">{ registerDescriptionValid }</small> }
                     <div className="d-flex align-items-center w-100">
                       <img className="icons me-2" src="/assets/icons/icon_user.png" alt="" />
                       <input 
                         type="text" 
-                        className="hbox" 
+                        className={`hbox ${ registerEmailValid && formSubmitted ? 'is-invalid' : '' }`} 
                         placeholder="Correo electronico"
                         name="registerEmail"
                         value={ registerEmail }
@@ -72,11 +108,12 @@ export const LostItemRegisterPage = () => {
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
+                    { registerEmailValid && formSubmitted && <small className="invalid-feedback">{ registerEmailValid }</small> }
                     <div className="d-flex align-items-center w-100">
                       <img className="icons me-2" src="/assets/icons/icon_qr.png" alt="" />
                       <input 
                         type="text" 
-                        className="hbox" 
+                        className={`hbox ${ registerQrValueValid && formSubmitted ? 'is-invalid' : '' }`}  
                         placeholder="Escanea aqui el QR" 
                         name="registerQrValue"
                         value={ registerQrValue }
@@ -84,6 +121,7 @@ export const LostItemRegisterPage = () => {
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
+                    { registerQrValueValid && formSubmitted && <small className="invalid-feedback">{ registerQrValueValid }</small> }
                   </div>
                   <div className="d-flex justify-content-end mt-4">
                     <button 
