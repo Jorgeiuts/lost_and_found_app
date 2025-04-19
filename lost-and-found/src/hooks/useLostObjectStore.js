@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 import { lostAndFoundApi } from "../API"
 
 export const useLostObjectStore = ( ) => {
@@ -9,11 +10,17 @@ export const useLostObjectStore = ( ) => {
         return data;
     }
 
-    const startRegister = async({ name, description, userId, qrId }) => {
+    const startRegister = async({ name, description, userEmail, qrValue }) => {
         try {
-            await lostAndFoundApi.post('/lost-objects', { name, description, userId, qrId });
+            console.log({name, description, userEmail, qrValue});
+            await lostAndFoundApi.post('/lost-objects', { name, description, userEmail, qrValue });
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al registrar el objeto',
+                text: "No se pudo registrar el objeto. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
         }
     }
 

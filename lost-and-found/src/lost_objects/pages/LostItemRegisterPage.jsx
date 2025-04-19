@@ -4,18 +4,18 @@ import Swal from 'sweetalert2';
 const registerObjectForm = {
   registerName:        '',
   registerDescription: '',
-  registerUserId:      '',
-  registerQrId:        ''
+  registerEmail:       '',
+  registerQrValue:     ''
 }
 
 export const LostItemRegisterPage = () => {
 
-  const { registerName, registerDescription, registerUserId, registerQrId, onInputChange, onResetForm } = useForm( registerObjectForm );
+  const { registerName, registerDescription, registerEmail, registerQrValue, onInputChange, onResetForm } = useForm( registerObjectForm );
   const { startRegister } = useLostObjectStore();
 
   const registerSubmit = ( event ) => {
     event.preventDefault();
-    startRegister({ name: registerName, description: registerDescription, userId: registerUserId, qrId: registerQrId });
+    startRegister({ name: registerName, description: registerDescription, userEmail: registerEmail, qrValue: registerQrValue });
     Swal.fire({
       title: '¡Registro exitoso!',
       text: 'Registro de objeto generado con exito',
@@ -66,8 +66,8 @@ export const LostItemRegisterPage = () => {
                         type="text" 
                         className="hbox" 
                         placeholder="Correo electronico"
-                        name="registerUserId"
-                        value={ registerUserId }
+                        name="registerEmail"
+                        value={ registerEmail }
                         onChange={ onInputChange }
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
@@ -78,8 +78,8 @@ export const LostItemRegisterPage = () => {
                         type="text" 
                         className="hbox" 
                         placeholder="Escanea aqui el QR" 
-                        name="registerQrId"
-                        value={ registerQrId }
+                        name="registerQrValue"
+                        value={ registerQrValue }
                         onChange={ onInputChange }
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>

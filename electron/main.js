@@ -8,6 +8,7 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
+    autoHideMenuBar: true,
   });
 
   win.loadURL("http://localhost:5173");
