@@ -17,16 +17,15 @@ const regiserObjectFormValidations = {
 }
 
 export const LostItemRegisterPage = () => {
-  
-  const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const { startRegister } = useLostObjectStore();
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const { 
     registerName, registerDescription, registerEmail, 
     registerQrValue, onInputChange, onResetForm, 
     ifFormValid, registerNameValid, registerDescriptionValid,
     registerEmailValid, registerQrValueValid
   } = useForm( registerObjectForm, regiserObjectFormValidations );
-  const { startRegister } = useLostObjectStore();
 
   const registerSubmit = ( event ) => {
     event.preventDefault();
