@@ -3,17 +3,27 @@ import { createSlice } from '@reduxjs/toolkit';
 export const lostObjectsSlice = createSlice({
    name: 'lostObjects',
    initialState: {
-       qrs: []
+       lostObjects: {},
+       isObjectLost: 'checking',
+       error: undefined,
    },
    reducers: {
-       onGenerateQrs: ( state, {payload} ) => {
-            state.qrs.push( payload )
-       }
+        onScaanLostQr: (state, {payload}) => {
+              state.isObjectLost = 'lost';
+              state.lostObjects = payload;
+              state.error = undefined;
+         },
+        onScaanRetrieveQr: (state, {payload}) => {
+              state.isObjectLost = 'recollection';
+              state.lostObjects = payload;
+              state.error = undefined;
+         }
    }
 });
 
 
 // Action creators are generated for each case reducer function
 export const { 
-    onGenerateQrs
+    onScaanLostQr, 
+    onScaanRetrieveQr
  } = lostObjectsSlice.actions;

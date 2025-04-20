@@ -34,7 +34,7 @@ export const AppRouter = () => {
             ( isAuthenticated === 'authenticated' )
             ? (
               <>
-                <Route path="/login" element={ <Login /> } />
+                <Route path="login" element={ <Login /> } />
                 <Route path="*" element={ <Navigate to="/login"/> } />
               </>
             )
