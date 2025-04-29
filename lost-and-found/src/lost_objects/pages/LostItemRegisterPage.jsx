@@ -23,7 +23,7 @@ export const LostItemRegisterPage = () => {
   const { 
     registerName, registerDescription, registerEmail, 
     registerQrValue, onInputChange, onResetForm, 
-    ifFormValid, registerNameValid, registerDescriptionValid,
+    isFormValid, registerNameValid, registerDescriptionValid,
     registerEmailValid, registerQrValueValid
   } = useForm( registerObjectForm, regiserObjectFormValidations );
 
@@ -31,7 +31,7 @@ export const LostItemRegisterPage = () => {
     event.preventDefault();
     setFormSubmitted(true);
 
-    if (!ifFormValid) {
+    if (!isFormValid) {
       Swal.fire({
         title: 'Error',
         text: 'Por favor complete todos los campos correctamente.',

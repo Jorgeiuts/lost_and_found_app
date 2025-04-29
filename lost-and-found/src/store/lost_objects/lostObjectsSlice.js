@@ -17,6 +17,11 @@ export const lostObjectsSlice = createSlice({
               state.isObjectLost = 'recollection';
               state.lostObjects = payload;
               state.error = undefined;
+         },
+         onCancelScaan: (state) => {
+              state.isObjectLost = 'checking';
+              state.lostObjects = {};
+              state.error = undefined;
          }
    }
 });
@@ -25,5 +30,6 @@ export const lostObjectsSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const { 
     onScaanLostQr, 
-    onScaanRetrieveQr
+    onScaanRetrieveQr,
+    onCancelScaan
  } = lostObjectsSlice.actions;

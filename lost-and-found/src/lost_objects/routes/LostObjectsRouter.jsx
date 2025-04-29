@@ -7,9 +7,9 @@ export const LostObjectsRouter = () => {
 
   const { isObjectLost } = useLostObjectStore();
   const routeMap = {
-    'checking': <NotificationObjectPage />,
+    'lost': <NotificationObjectPage />,
     'recollection': <RecollectionObjectPage />,
-    'lost': <HomePage />
+    'checking': <HomePage />
   }
 
   return (

@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { lostAndFoundApi } from "../API"
 import { useDispatch, useSelector } from "react-redux";
-import { onScaanLostQr, onScaanRetrieveQr } from "../store";
+import { onCancelScaan, onScaanLostQr, onScaanRetrieveQr } from "../store";
 
 export const useLostObjectStore = ( ) => {
 
@@ -30,7 +30,7 @@ export const useLostObjectStore = ( ) => {
 
     const startScaanQr = async( qrValue ) => {
         try {
-            const { data } = await lostAndFoundApi.get(`/lost-objects/QR/${qrValue}`);
+            const { data } = await lostAndFoundApi.get(`/qrs/lost-objects/QR/${qrValue}`);
             if ( data.status ) {
                 dispatch( onScaanRetrieveQr({name: data.name, description: data.description, email: data.userEmail, qrValue }) );
             } else {
@@ -46,6 +46,10 @@ export const useLostObjectStore = ( ) => {
         }
     }
 
+    const startCancelScaan = () => {
+        dispatch( onCancelScaan() );
+    }
+
     return {
 
         lostObjects,
@@ -54,7 +58,8 @@ export const useLostObjectStore = ( ) => {
 
         getQrs,
         startRegister,
-        startScaanQr
+        startScaanQr,
+        startCancelScaan
 
     }
 

@@ -16,13 +16,13 @@ export const HomePage = () => {
   const { user } = useAuthStore();
   const { startScaanQr } = useLostObjectStore();
   const [formSubmitted, setformSubmitted] = useState(false);
-  const { scaanQrValue, onInputChange, onResetForm, ifFormValid, scaanQrValueValid } = useForm( scaanQrCodeForm, scaanQrCodeFormValidations );
+  const { scaanQrValue, onInputChange, onResetForm, isFormValid, scaanQrValueValid } = useForm( scaanQrCodeForm, scaanQrCodeFormValidations );
 
   const scaanQrCodeSubmit = event => {
     event.preventDefault();
     setformSubmitted(true);
 
-    if (!ifFormValid) {
+    if (!isFormValid) {
       Swal.fire({
         title: 'Error',
         text: 'Por favor ingrese un codigo QR valido',

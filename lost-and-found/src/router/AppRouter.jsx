@@ -31,7 +31,7 @@ export const AppRouter = () => {
   return (
       <Routes>
           {
-            ( isAuthenticated === 'authenticated' )
+            ( isAuthenticated === 'not-authenticated' )
             ? (
               <>
                 <Route path="login" element={ <Login /> } />
