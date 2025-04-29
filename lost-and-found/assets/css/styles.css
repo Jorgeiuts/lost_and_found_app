@@ -140,6 +140,21 @@ html, body {
     background: linear-gradient(to bottom right, var(--secondary-blue-dark), var(--secondary-blue-d));
     box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
 }
+.btn-danger {
+    width: 170px;
+    height: 36px;
+    background: linear-gradient(to bottom right, var(--primary-red), var(--section-red));
+    color: var(--secondary-light);
+    font-family: 'Kanit-MediumItalic';
+    font-size: 12px;
+    border-radius: 3px;
+    border: none;
+    transition: box-shadow 0.25s ease-in-out;
+}
+.btn-danger:hover {
+    background: linear-gradient(to bottom right, var(--section-red), var(--primary-red));
+    box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.5);
+}
 /* Container */
 .container-objects {
     background-color: var(--primary-dark-blue);
