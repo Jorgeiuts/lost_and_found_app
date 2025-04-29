@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuthStore, useForm } from '../../hooks';
+import { useAuthStore, useForm, useLostObjectStore } from '../../hooks';
 import '/assets/css/home.css';
 import Swal from 'sweetalert2';
 
@@ -14,6 +14,7 @@ const scaanQrCodeFormValidations = {
 export const HomePage = () => {
 
   const { user } = useAuthStore();
+  const { startScaanQr } = useLostObjectStore();
   const [formSubmitted, setformSubmitted] = useState(false);
   const { scaanQrValue, onInputChange, onResetForm, ifFormValid, scaanQrValueValid } = useForm( scaanQrCodeForm, scaanQrCodeFormValidations );
 
@@ -31,6 +32,16 @@ export const HomePage = () => {
       return;
     }
 
+    try {
+      startScaanQr(scaanQrValue);
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
 
   }
 

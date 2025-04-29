@@ -4,3 +4,4 @@ export * from './NotificationObjectPage';
 export * from './RecollectionObjectPage';
 export * from './ReportObjectPage';
 export * from './QRgenerator';
+export * from './InformacionQrs';
