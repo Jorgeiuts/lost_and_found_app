@@ -13,7 +13,7 @@ export const useAuthStore = () => {
             const { data } = await lostAndFoundApi.post('/login', { email, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('token-init-date', new Date().getTime() );
-            dispatch( onLogin( {email: data.email} ) );
+            dispatch( onLogin( {email: data.email, name: data.name} ) );
         } catch (error) {
             dispatch( onLogout( 'Credenciales incorrectas' ) );
             setTimeout(() => {
@@ -23,8 +23,25 @@ export const useAuthStore = () => {
     }
 
     const checkAuthToken = async() => {
-        const token = await localStorage.getItem('token');
-        if ( !token ) return dispatch( onLogout() );
+        const token = localStorage.getItem('token');
+        const tokenInitDate = localStorage.getItem('token-init-date');
+
+        if (!token || !tokenInitDate) {
+            return dispatch(onLogout());
+        }
+
+        const tokenLifetime = 3600000;
+        const tokenExpirationTime = parseInt(tokenInitDate) + tokenLifetime;
+        const currentTime = new Date().getTime();
+
+        if (currentTime >= tokenExpirationTime) {
+            return startLogout();
+        }
+
+        const timeUntilExpiration = tokenExpirationTime - currentTime;
+        setTimeout(() => {
+            startLogout();
+        }, timeUntilExpiration);
 
         // try {
         //     const { data } = await lostAndFoundApi.get('/auth');

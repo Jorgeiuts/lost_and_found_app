@@ -51,7 +51,7 @@ export const HomePage = () => {
         <div className="col">
           <div className="card shadow-lg rounded">
             <div className="card-body text-center">
-              <h1 className="primary-txt-custom">¡Bienvenido!, { user?.email || 'Usuario' }</h1>
+              <h1 className="primary-txt-custom">¡Bienvenido!, { user?.name || 'Usuario' }</h1>
               <p className="text-info-custom">Gestiona los objetos perdidos de forma rápida y eficiente</p>
             </div>
           </div>
