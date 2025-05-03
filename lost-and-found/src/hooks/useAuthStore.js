@@ -43,15 +43,15 @@ export const useAuthStore = () => {
             startLogout();
         }, timeUntilExpiration);
 
-        // try {
-        //     const { data } = await lostAndFoundApi.get('/auth');
-        //     localStorage.setItem('token', data.token);
-        //     localStorage.setItem('token-init-date', new Date().getTime() );
-        //     dispatch( onLogin( data.user ) );
-        // } catch (error) {
-        //     localStorage.clear();
-        //     dispatch( onLogout() );
-        // }
+        try {
+            const { data } = await lostAndFoundApi.post('/login', { email, password });
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('token-init-date', new Date().getTime() );
+            dispatch( onLogin( {email: data.email, name: data.name} ) );
+        } catch (error) {
+            localStorage.clear();
+            dispatch( onLogout() );
+        }
     }
 
     const startLogout = () => {
