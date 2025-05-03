@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { lostAndFoundApi } from "../API"
 import { useDispatch, useSelector } from "react-redux";
-import { onCancelScaan, onScaanLostQr, onScaanRetrieveQr } from "../store";
+import { onCancelScaan, onScaanLostQr, onScaanRetrieveQr, onRetrievedObject } from "../store";
 
 export const useLostObjectStore = ( ) => {
 
@@ -66,6 +66,30 @@ export const useLostObjectStore = ( ) => {
         }
     }
 
+    const startDeliverObject = async( qrValue, isOwnerRetrieved ) => {
+        try {
+            await lostAndFoundApi.put(`/qrs/lost-objects/${qrValue}`);
+            if ( isOwnerRetrieved ) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Objeto entregado',
+                    text: "El objeto ha sido entregado correctamente.",
+                    confirmButtonText: 'Aceptar'
+                });
+                dispatch( onCancelScaan() );
+            } else {
+                dispatch( onRetrievedObject() );
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al entregar el objeto',
+                text: "No se pudo entregar el objeto. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
+
     const startCancelScaan = () => {
         dispatch( onCancelScaan() );
     }
@@ -81,6 +105,7 @@ export const useLostObjectStore = ( ) => {
         startScaanQr,
         startSendEmail,
         startCancelScaan,
+        startDeliverObject,
 
     }
 

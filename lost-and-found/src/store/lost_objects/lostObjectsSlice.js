@@ -18,6 +18,10 @@ export const lostObjectsSlice = createSlice({
               state.lostObjects = payload;
               state.error = undefined;
          },
+         onRetrievedObject: (state) => {
+              state.isObjectLost = 'reporting';
+              state.error = undefined;
+         },
          onCancelScaan: (state) => {
               state.isObjectLost = 'checking';
               state.lostObjects = {};
@@ -31,5 +35,6 @@ export const lostObjectsSlice = createSlice({
 export const { 
     onScaanLostQr, 
     onScaanRetrieveQr,
-    onCancelScaan
+    onCancelScaan,
+    onRetrievedObject
  } = lostObjectsSlice.actions;
