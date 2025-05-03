@@ -18,7 +18,7 @@ export const NotificationObjectPage = () => {
             <div className="card-body d-flex flex-column flex-grow-1">
               <h1 className="primary-txt-custom text-start">Notificar objeto perdido:</h1>
               <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-                <p className="text-info-custom">Porfavro validar los campos:</p>
+                <p className="text-info-custom">Por favro validar los campos:</p>
                 <form className="w-100" onSubmit={ onSendEmail }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                     <div className="d-flex align-items-center w-100">
