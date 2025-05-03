@@ -3,7 +3,12 @@ import { useLostObjectStore } from "../../hooks";
 export const NotificationObjectPage = () => {
 
   const { lostObjects } = useLostObjectStore();
-  const { startCancelScaan } = useLostObjectStore();
+  const { startCancelScaan, startSendEmail } = useLostObjectStore();
+
+  const onSendEmail = ( event ) => {
+    event.preventDefault();
+    startSendEmail( lostObjects.qrValue );
+  }
 
   return (
     <div className="container h-100 d-flex flex-column">
@@ -14,7 +19,7 @@ export const NotificationObjectPage = () => {
               <h1 className="primary-txt-custom text-start">Notificar objeto perdido:</h1>
               <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
                 <p className="text-info-custom">Porfavro validar los campos:</p>
-                <form className="w-100">
+                <form className="w-100" onSubmit={ onSendEmail }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                     <div className="d-flex align-items-center w-100">
                       <img className="icons me-2" src="/assets/icons/icon_qr.png" alt="" />

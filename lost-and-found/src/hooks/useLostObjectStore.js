@@ -46,6 +46,26 @@ export const useLostObjectStore = ( ) => {
         }
     }
 
+    const startSendEmail = async( qrValue ) => {
+        try {
+            await lostAndFoundApi.put(`/qrs/lost-objects/report/${qrValue}`);
+            Swal.fire({
+                icon: 'success',
+                title: 'Correo enviado',
+                text: "El correo ha sido enviado correctamente.",
+                confirmButtonText: 'Aceptar'
+            });
+            dispatch( onCancelScaan() );
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al enviar el correo',
+                text: "No se pudo enviar el correo. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
+
     const startCancelScaan = () => {
         dispatch( onCancelScaan() );
     }
@@ -59,7 +79,8 @@ export const useLostObjectStore = ( ) => {
         getQrs,
         startRegister,
         startScaanQr,
-        startCancelScaan
+        startSendEmail,
+        startCancelScaan,
 
     }
 
