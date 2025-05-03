@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const InformacionQrs = () => {
+export const InformationQrs = () => {
   return (
     <div>Informacion QRs</div>
   )
