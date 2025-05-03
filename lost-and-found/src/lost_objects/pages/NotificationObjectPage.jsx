@@ -5,7 +5,6 @@ export const NotificationObjectPage = () => {
   const { lostObjects } = useLostObjectStore();
   const { startCancelScaan } = useLostObjectStore();
 
-
   return (
     <div className="container h-100 d-flex flex-column">
       <div className="row p-4 flex-grow-1">
@@ -25,6 +24,7 @@ export const NotificationObjectPage = () => {
                         placeholder="QR del objeto"
                         value={ lostObjects?.qrValue } 
                         name="objectQr"
+                        readOnly
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
@@ -36,6 +36,7 @@ export const NotificationObjectPage = () => {
                         placeholder="Nombre del objeto"
                         value={ lostObjects?.name } 
                         name="objectName"
+                        readOnly
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
@@ -47,6 +48,7 @@ export const NotificationObjectPage = () => {
                         placeholder="Descripcion del objeto"
                         value={ lostObjects?.description } 
                         name="objectDescription"
+                        readOnly
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
@@ -57,7 +59,8 @@ export const NotificationObjectPage = () => {
                         className="hbox" 
                         placeholder="Correo del propietario"
                         value={ lostObjects?.email }
-                        name="objectEmail" 
+                        name="objectEmail"
+                        readOnly 
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
