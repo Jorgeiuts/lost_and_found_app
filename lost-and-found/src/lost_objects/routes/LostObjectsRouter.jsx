@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { HomePage, LostItemRegisterPage, NotificationObjectPage, RecollectionObjectPage, ReportObjectPage, QRgenerator, InformationQrs } from '../pages'
+import { HomePage, LostItemRegisterPage, NotificationObjectPage, RecollectionObjectPage, ReportObjectPage, QRgenerator, InformationQrs, ReportGeneratorPage } from '../pages'
 import { SideBar } from "../../ui";
 import { useLostObjectStore } from "../../hooks";
 
@@ -9,7 +9,8 @@ export const LostObjectsRouter = () => {
   const routeMap = {
     'lost': <NotificationObjectPage />,
     'recollection': <RecollectionObjectPage />,
-    'checking': <HomePage />
+    'checking': <HomePage />,
+    'reporting': <ReportGeneratorPage />
   }
 
   return (
