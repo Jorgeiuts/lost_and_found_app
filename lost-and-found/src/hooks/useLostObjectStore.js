@@ -68,8 +68,8 @@ export const useLostObjectStore = ( ) => {
 
     const startDeliverObject = async( qrValue, isOwnerRetrieved ) => {
         try {
-            await lostAndFoundApi.put(`/qrs/lost-objects/${qrValue}`);
             if ( isOwnerRetrieved ) {
+                await lostAndFoundApi.put(`/qrs/lost-objects/${qrValue}`);
                 Swal.fire({
                     icon: 'success',
                     title: 'Objeto entregado',
@@ -85,6 +85,27 @@ export const useLostObjectStore = ( ) => {
                 icon: 'error',
                 title: 'Error al entregar el objeto',
                 text: "No se pudo entregar el objeto. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
+
+    const startGenerateReport = async( {qrValue, name, description} ) => {
+        try {
+            await lostAndFoundApi.put(`/qrs/lost-objects/${qrValue}`);
+            await lostAndFoundApi.post('/reports', { qrValue, name, date: new Date().toISOString(), description });
+            Swal.fire({
+                icon: 'success',
+                title: 'Reporte generado',
+                text: "El reporte ha sido generado correctamente.",
+                confirmButtonText: 'Aceptar'
+            });
+            dispatch( onCancelScaan() );
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al generar el reporte',
+                text: "No se pudo generar el reporte. Por favor, inténtelo de nuevo más tarde.",
                 confirmButtonText: 'Aceptar'
             });
         }
@@ -106,6 +127,7 @@ export const useLostObjectStore = ( ) => {
         startSendEmail,
         startCancelScaan,
         startDeliverObject,
+        startGenerateReport,
 
     }
 
