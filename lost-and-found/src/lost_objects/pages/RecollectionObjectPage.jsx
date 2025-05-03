@@ -7,7 +7,7 @@ export const RecollectionObjectPage = () => {
   const { startCancelScaan, startDeliverObject } = useLostObjectStore();
   let isOwnerRetrieved = false;
   
-  const onSendEmail = ( event ) => {
+  const onDeliverObject = ( event ) => {
     event.preventDefault();
     Swal.fire({
       title: '¿Confirmar entrega?',
@@ -36,7 +36,7 @@ export const RecollectionObjectPage = () => {
               <h1 className="primary-txt-custom text-start">Entrega de objeto perdido:</h1>
               <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
                 <p className="text-info-custom">Por favor validar los campos:</p>
-                <form className="w-100" onSubmit={ onSendEmail }>
+                <form className="w-100" onSubmit={ onDeliverObject }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                     <div className="d-flex align-items-center w-100">
                       <img className="icons me-2" src="/assets/icons/icon_qr.png" alt="" />
