@@ -1,7 +1,15 @@
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import '/assets/css/styles.css'
+import { useAuthStore } from "../../hooks"
 
 export const SideBar = () => {
+
+    const { startLogout } = useAuthStore();
+
+    const onLogout = () => {
+        startLogout();
+    }
+
   return (
     <div className="sidebar d-flex flex-column p-4 h-100">
         <img src="/assets/logos/logo_lnf.png" alt="" />
@@ -18,17 +26,22 @@ export const SideBar = () => {
                 <img src="/assets/icons/icon_search.png" alt="Reporte de entrega" className="icon-img" />
                 Reporte de entrega
             </NavLink>
+            <NavLink to="/information" className="nav-link mt-3">
+                <img src="/assets/icons/icon_search.png" alt="Buscador de QR" className="icon-img" />
+                Informacion QRs
+            </NavLink>
             <NavLink to="/QRgenerator" className="nav-link mt-3">
                 <img src="/assets/icons/icon_qr.png" alt="Generador de QR" className="icon-img" />
                 Generador de QRs
             </NavLink>
         </nav>
-        <Link 
-        to="/login"
-        className="logout mt-auto" >
+        <button 
+            onClick={onLogout}
+            className="logout mt-auto" 
+        >
             <img src="/assets/icons/icon_logout.png" alt="Logout" className="icon-img" /> 
             Cerrar sesión
-        </Link>
+        </button>
     </div>
   )
 }

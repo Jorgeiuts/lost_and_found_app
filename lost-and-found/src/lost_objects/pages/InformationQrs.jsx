@@ -9,11 +9,11 @@ const scaanQrCodeFormValidations = {
   scaanQrValue: [ (value) => value.length === 36, 'Porfavor ingresa un codigo qr valido' ],
 }
 
-export const ReportObjectPage = () => {
+export const InformationQrs = () => {
   const { scaanQrValue, onInputChange, onResetForm, isFormValid, scaanQrValueValid } = useForm( qrForm, scaanQrCodeFormValidations );
   const [formSubmitted, setformSubmitted] = useState(false);
-  const { startGetReport } = useLostObjectStore();
-  const [reportData, setReportData] = useState(null);
+  const { startGetObjectInfo } = useLostObjectStore();
+  const [objectData, setObjectData] = useState(null);
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -29,11 +29,11 @@ export const ReportObjectPage = () => {
       return;
     }
 
-    const data = await startGetReport(scaanQrValue);
+    const data = await startGetObjectInfo(scaanQrValue);
     if (data) {
-      setReportData(data);
+      setObjectData(data);
     } else {
-      setReportData(null);
+      setObjectData(null);
     }
 
     setformSubmitted(false);
@@ -46,7 +46,7 @@ export const ReportObjectPage = () => {
         <div className="col">
           <div className="card shadow-lg rounded">
             <form className="card-body" onSubmit={onSubmit}>
-            <h3 className="primary-txt-custom">Busqueda de reportes</h3>
+            <h3 className="primary-txt-custom">Informacion de objeto</h3>
             <p className="text-info-custom">Por favor escanea el código QR en el siguiente espacio:</p>
               <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                 <div className="d-flex align-items-center w-100">
@@ -77,24 +77,24 @@ export const ReportObjectPage = () => {
         <div className="col">
           <div className="card shadow-lg rounded h-100 d-flex flex-column">
             <div className="card-body d-flex flex-column">
-              {reportData ? (
+              {objectData ? (
                 <div>
-                  <h4 className="text-primary">Información del Reporte</h4>
+                  <h4 className="text-primary">Información del Objeto</h4>
                   <div className="mb-3">
-                    <strong className="text-info-custom">QR:</strong> <span className="text-info-custom">{reportData.qrValue}</span>
+                    <strong className="text-info-custom">QR:</strong> <span className="text-info-custom">{objectData.qrValue}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Nombre quien recibio:</strong> <span className="text-info-custom">{reportData.name}</span>
+                    <strong className="text-info-custom">Correo del propietario:</strong> <span className="text-info-custom">{objectData.userEmail}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Fecha:</strong> <span className="text-info-custom">{new Date(reportData.date).toLocaleString()}</span>
+                    <strong className="text-info-custom">Objeto:</strong> <span className="text-info-custom">{objectData.name}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Descripción:</strong> <span className="text-info-custom">{reportData.description}</span>
+                    <strong className="text-info-custom">Descripción del objeto:</strong> <span className="text-info-custom">{objectData.description}</span>
                   </div>
                 </div>
               ) : (
-                <p className="text-muted text-info-custom">No hay información del reporte para mostrar.</p>
+                <p className="text-muted text-info-custom">No hay información del objeto para mostrar.</p>
               )}
             </div>
           </div>

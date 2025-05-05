@@ -1,13 +1,58 @@
-import '/assets/css/home.css'
+import { useState } from 'react';
+import { useAuthStore, useForm, useLostObjectStore } from '../../hooks';
+import '/assets/css/home.css';
+import Swal from 'sweetalert2';
+
+const scaanQrCodeForm = {
+  scaanQrValue: '',
+}
+
+const scaanQrCodeFormValidations = {
+  scaanQrValue: [ (value) => value.length === 36, 'Porfavor ingresa un codigo qr valido' ],
+}
 
 export const HomePage = () => {
+
+  const { user } = useAuthStore();
+  const { startScaanQr } = useLostObjectStore();
+  const [formSubmitted, setformSubmitted] = useState(false);
+  const { scaanQrValue, onInputChange, onResetForm, isFormValid, scaanQrValueValid } = useForm( scaanQrCodeForm, scaanQrCodeFormValidations );
+
+  const scaanQrCodeSubmit = event => {
+    event.preventDefault();
+    setformSubmitted(true);
+
+    if (!isFormValid) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor ingrese un codigo QR valido',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+      return;
+    }
+
+    try {
+      startScaanQr(scaanQrValue);
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
+    setformSubmitted(false);
+    onResetForm();
+  }
+
   return (
     <div className="container h-100 d-flex flex-column">
       <div className="row p-3">
         <div className="col">
-          <div class="card shadow-lg rounded">
-            <div class="card-body text-center">
-              <h1 className="primary-txt-custom">¡Bienvenido!, Usuario</h1>
+          <div className="card shadow-lg rounded">
+            <div className="card-body text-center">
+              <h1 className="primary-txt-custom">¡Bienvenido!, { user?.name || 'Usuario' }</h1>
               <p className="text-info-custom">Gestiona los objetos perdidos de forma rápida y eficiente</p>
             </div>
           </div>
@@ -15,33 +60,33 @@ export const HomePage = () => {
       </div>
       <div className="row p-4 flex-grow-1">
         <div className="col">
-          <div class="card shadow-lg rounded h-100 d-flex flex-column">
-            <div class="card-body d-flex flex-column">
+          <div className="card shadow-lg rounded h-100 d-flex flex-column">
+            <div className="card-body d-flex flex-column">
               <h3 className="primary-txt-custom">Escanea el código QR:</h3>
               <p className="text-info-custom">Por favor escanea el código QR en el siguiente espacio:</p>
-              <div class="input-wrapper d-flex align-items-center flex-grow-1 p-3 bg-light rounded border">
-                  <img class="icons" src="/assets/icons/icon_qr.png" alt="" />
-                  <input type="text" class="hbox" placeholder="Escanear aquí el código QR" />
-                  <i className="bi bi-qr-code-scan fs-4 text-primary"></i>
-              </div>
-              <div className="d-flex justify-content-center mt-4">
-                <button class="btn btn-primary">Aceptar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="row p-4">
-        <div className="col">
-          <div class="card">
-            <div class="card-body">
-            <p className="text-info-custom">Por favor digite la cantidad de QR que necesites generar:</p>
-            <div class="input-wrapper d-flex align-items-center">
-                        <img class="icons" src="/assets/icons/icon_qr.png" alt="" />
-                        <input type="number" class="hbox" placeholder="Cantidad de códigos QR" />
-                        <i class="bi bi-qr-code-scan"></i>
-                    </div>
-                    <button class="btn btn-primary mt-3">Generar</button>
+              <form onSubmit={ scaanQrCodeSubmit } className="card-body">
+                <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
+                  <div className="d-flex align-items-center w-100">
+                    <img className="icons" src="/assets/icons/icon_qr.png" alt="" />
+                    <input 
+                      type="text" 
+                      className={`hbox ${ scaanQrValueValid && formSubmitted ? 'is-invalid' : '' }`}
+                      placeholder="Escanear aquí el código QR" 
+                      name="scaanQrValue"
+                      value={ scaanQrValue }
+                      onChange={ onInputChange }
+                    />
+                    <i className="bi bi-qr-code-scan fs-4 text-primary"></i>
+                  </div>
+                  { scaanQrValueValid && formSubmitted && <small className='invalid-feedback'>{ scaanQrValueValid }</small> }
+                </div>
+                <div className="d-flex justify-content-center mt-4">
+                  <button 
+                    className="btn btn-primary"
+                    type="submit"
+                  >Aceptar</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
