@@ -1,1 +1,3 @@
 # Lost and Found
+
+Este proyecto se realizo en base a la necesidad de mantener un inventario de objetos bajo dentro de el departamento de lost and found, se realiza el envio de correos a los usuarios propietarios del objeto así de esta forma se informa mas rapido que el objeto se encuentra dentro de este departamento y que puede pasar a recogerlo así de esta manera se reducira mas el inventario y los objetos seran entregados a sus dueños.
