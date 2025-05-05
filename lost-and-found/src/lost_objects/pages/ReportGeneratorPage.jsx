@@ -46,7 +46,7 @@ export const ReportGeneratorPage = () => {
                 <form className="w-100 card-body" onSubmit={ onSubmitReport }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                     <div className="d-flex align-items-center w-100">
-                      <img className="icons me-2" src="/assets/icons/icon_qr.png" alt="" />
+                      <img className="icons me-2" src="/assets/icons/icon_user.png" alt="" />
                       <input 
                         type="text" 
                         className={`hbox ${ nameWhoReceiveValid && formSubmitted ? 'is-invalid' : '' }`}

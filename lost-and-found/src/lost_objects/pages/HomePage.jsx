@@ -42,7 +42,8 @@ export const HomePage = () => {
         confirmButtonText: 'Aceptar'
       })
     }
-
+    setformSubmitted(false);
+    onResetForm();
   }
 
   return (

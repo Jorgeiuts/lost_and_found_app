@@ -111,6 +111,41 @@ export const useLostObjectStore = ( ) => {
         }
     }
 
+    const startGetReport = async( qrValue ) => {
+        try {
+            const { data } = await lostAndFoundApi.get(`/reports/${qrValue}`);
+            const { content } = data;
+    
+            if (Array.isArray(content) && content.length > 0) {
+                const lastReport = content.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
+                return lastReport;
+            }
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al obtener el reporte',
+                text: error.message || "No se pudo obtener el reporte. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
+            return null;
+        }
+    }
+
+    const startGetObjectInfo = async( qrValue ) => {
+        try {
+            const { data } = await lostAndFoundApi.get(`/qrs/lost-objects/QR/${qrValue}`);
+            return data;
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al obtener la información del objeto',
+                text: error.message || "No se pudo obtener la información del objeto. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
+            return null;
+        }
+    }
+
     const startCancelScaan = () => {
         dispatch( onCancelScaan() );
     }
@@ -128,6 +163,8 @@ export const useLostObjectStore = ( ) => {
         startCancelScaan,
         startDeliverObject,
         startGenerateReport,
+        startGetReport,
+        startGetObjectInfo,
 
     }
 

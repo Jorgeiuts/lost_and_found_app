@@ -7,8 +7,6 @@ export const QRgenerator = () => {
   const [qrs, setQrs] = useState(0);
   const [qrImages, setQrImages] = useState([]);
 
-  const ids = ['1', '2', '3', '4', '5', '6', '7'];
-
   const onValueChange = ({target}) => {
     setQrs(target.value);
   };
@@ -16,11 +14,10 @@ export const QRgenerator = () => {
   const onGenerate = async () => {
     try {
       const data = await getQrs(qrs);
-      console.log(data);
 
       const generatedQrs = await Promise.all(
         data.map(async (qrGenerated) => {
-          const qr = await QRcode.toString(qrGenerated.qrValue, { type: 'svg', width: 150 }); // Definir un tamaño fijo para los QRs
+          const qr = await QRcode.toString(qrGenerated.qrValue, { type: 'svg', width: 150 });
           return { id: qrGenerated.id, qr };
         })
       );
@@ -32,15 +29,14 @@ export const QRgenerator = () => {
   };
 
   const downloadSVG = () => {
-    // Calculamos el número de filas necesarias (5 QRs por fila)
-    const qrHeight = 150; // Altura de cada QR
-    const qrWidth = 150; // Ancho de cada QR
-    const cols = 5; // Número de columnas por fila
-    const rows = Math.ceil(qrImages.length / cols); // Número total de filas necesarias
+    const qrHeight = 150; 
+    const qrWidth = 150; 
+    const cols = 5; 
+    const rows = Math.ceil(qrImages.length / cols); 
 
     const svgContent = qrImages.map(({ qr }, index) => {
-      const x = (index % cols) * qrWidth; // Calculamos la posición X
-      const y = Math.floor(index / cols) * qrHeight; // Calculamos la posición Y
+      const x = (index % cols) * qrWidth; 
+      const y = Math.floor(index / cols) * qrHeight; 
 
       return `
         <g transform="translate(${x}, ${y})">
@@ -59,7 +55,6 @@ export const QRgenerator = () => {
       </svg>
     `;
 
-    // Crear un enlace de descarga
     const blob = new Blob([svgFile], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -93,7 +88,6 @@ export const QRgenerator = () => {
                 Generar
               </button>
 
-              {/* Mostrar los QR generados en Grid con Scroll */}
               <div className="mt-4" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                 <div
                   style={{
@@ -113,14 +107,12 @@ export const QRgenerator = () => {
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
                       }}
                     >
-                      {/* Mostrar solo el QR sin el texto ID */}
                       <div dangerouslySetInnerHTML={{ __html: qr }} />
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Botón para descargar el archivo SVG */}
             {qrImages.length > 0  && <button className="btn btn-primary mt-3" onClick={downloadSVG}>
                 Descargar archivo SVG
               </button>}
