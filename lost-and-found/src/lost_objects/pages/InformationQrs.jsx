@@ -79,7 +79,7 @@ export const InformationQrs = () => {
             <div className="card-body d-flex flex-column">
               {objectData ? (
                 <div>
-                  <h4 className="text-primary">Información del Objeto</h4>
+                  <h4 className="primary-txt-custom">Información del Objeto</h4>
                   <div className="mb-3">
                     <strong className="text-info-custom">QR:</strong> <span className="text-info-custom">{objectData.qrValue}</span>
                   </div>
