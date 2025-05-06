@@ -1,7 +1,11 @@
 {
-  "name": "lost-and-found-desktop-app",
+  "name": "lost-and-found-app",
   "version": "1.0.0",
-  "main": "main.js",
+  "main": "electron/main.js",
+  "build": {
+    "productName": "Lost and Found App",
+    "icon": "electron/assets/logo_lnf"
+  },
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^9.1.2",

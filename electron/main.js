@@ -1,5 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 
+app.setName("Lost and Found App");
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1100,
@@ -9,9 +11,13 @@ function createWindow() {
       contextIsolation: true,
     },
     autoHideMenuBar: true,
+    icon: __dirname + "/assets/icons/logo_lnf.icns",
   });
 
   win.loadURL("http://localhost:5173");
+  win.onclose = () => {
+    win = null;
+  };
 }
 
 app.whenReady().then(() => {
