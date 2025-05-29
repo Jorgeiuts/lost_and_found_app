@@ -1,4 +1,5 @@
 import QRcode from 'qrcode';
+import JSZip from 'jszip';
 import { useState } from 'react';
 import { useLostObjectStore } from '../../hooks';
 
@@ -7,7 +8,7 @@ export const QRgenerator = () => {
   const [qrs, setQrs] = useState(0);
   const [qrImages, setQrImages] = useState([]);
 
-  const onValueChange = ({target}) => {
+  const onValueChange = ({ target }) => {
     setQrs(target.value);
   };
 
@@ -17,8 +18,9 @@ export const QRgenerator = () => {
 
       const generatedQrs = await Promise.all(
         data.map(async (qrGenerated) => {
-          const qr = await QRcode.toString(qrGenerated.qrValue, { type: 'svg', width: 150 });
-          return { id: qrGenerated.id, qr };
+          const qrSvg = await QRcode.toString(qrGenerated.qrValue, { type: 'svg', width: 150 });
+          const qrPng = await QRcode.toDataURL(qrGenerated.qrValue, { width: 150 });
+          return { id: qrGenerated.id, qrSvg, qrPng };
         })
       );
 
@@ -29,29 +31,25 @@ export const QRgenerator = () => {
   };
 
   const downloadSVG = () => {
-    const qrHeight = 150; 
-    const qrWidth = 150; 
-    const cols = 5; 
-    const rows = Math.ceil(qrImages.length / cols); 
+    const qrHeight = 150;
+    const qrWidth = 150;
+    const cols = 5;
+    const rows = Math.ceil(qrImages.length / cols);
 
-    const svgContent = qrImages.map(({ qr }, index) => {
-      const x = (index % cols) * qrWidth; 
-      const y = Math.floor(index / cols) * qrHeight; 
+    const svgContent = qrImages.map(({ qrSvg }, index) => {
+      const x = (index % cols) * qrWidth;
+      const y = Math.floor(index / cols) * qrHeight;
 
       return `
         <g transform="translate(${x}, ${y})">
-          ${qr} <!-- Sólo la imagen del QR -->
+          ${qrSvg}
         </g>
       `;
     }).join('');
 
     const svgFile = `
       <svg xmlns="http://www.w3.org/2000/svg" width="${qrWidth * cols}" height="${qrHeight * rows}" viewBox="0 0 ${qrWidth * cols} ${qrHeight * rows}">
-        <foreignObject width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml" style="font-family: Arial, sans-serif; color: black;">
-            ${svgContent}
-          </div>
-        </foreignObject>
+        ${svgContent}
       </svg>
     `;
 
@@ -60,6 +58,22 @@ export const QRgenerator = () => {
     const a = document.createElement('a');
     a.href = url;
     a.download = 'qrs-generados.svg';
+    a.click();
+  };
+
+  const downloadPNGAsZip = async () => {
+    const zip = new JSZip();
+
+    qrImages.forEach(({ qrPng }, index) => {
+      const base64Data = qrPng.split(',')[1]; // Elimina el prefijo "data:image/png;base64,"
+      zip.file(`qr-${index + 1}.png`, base64Data, { base64: true });
+    });
+
+    const zipBlob = await zip.generateAsync({ type: 'blob' });
+    const url = URL.createObjectURL(zipBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'qrs-generados.zip';
     a.click();
   };
 
@@ -96,7 +110,7 @@ export const QRgenerator = () => {
                     gap: '20px',
                   }}
                 >
-                  {qrImages.map(({ qr }, index) => (
+                  {qrImages.map(({ qrSvg }, index) => (
                     <div
                       key={index}
                       style={{
@@ -107,15 +121,22 @@ export const QRgenerator = () => {
                         boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
                       }}
                     >
-                      <div dangerouslySetInnerHTML={{ __html: qr }} />
+                      <div dangerouslySetInnerHTML={{ __html: qrSvg }} />
                     </div>
                   ))}
                 </div>
               </div>
 
-            {qrImages.length > 0  && <button className="btn btn-primary mt-3" onClick={downloadSVG}>
-                Descargar archivo SVG
-              </button>}
+              {qrImages.length > 0 && (
+                <>
+                  <button className="btn btn-primary mt-3" onClick={downloadSVG}>
+                    Descargar archivo SVG
+                  </button>
+                  <button className="btn btn-primary mt-3 ms-2" onClick={downloadPNGAsZip}>
+                    Descargar como ZIP (PNG)
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

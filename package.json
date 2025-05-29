@@ -18,5 +18,8 @@
     "start:react": "cd lost-and-found && yarn dev",
     "start:electron": "wait-on http://localhost:5173 && electron electron/main.js",
     "build": "cd lost-and-found && yarn build && electron-builder"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1"
   }
 }

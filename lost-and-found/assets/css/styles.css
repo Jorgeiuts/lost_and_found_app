@@ -208,6 +208,10 @@ html, body {
     font-family: 'Kanit-Italic';
     color: var(--primary-dark-blue);
 }
+.text-info-custom-bold {
+    font-family: 'Kanit-BlackItalic';
+    color: var(--primary-dark-blue);
+}
 .invalid-feedback {
     display: block;
 }

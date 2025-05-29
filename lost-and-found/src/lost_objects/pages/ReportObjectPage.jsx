@@ -81,16 +81,16 @@ export const ReportObjectPage = () => {
                 <div>
                   <h4 className="primary-txt-custom">Información del Reporte</h4>
                   <div className="mb-3">
-                    <strong className="text-info-custom">QR:</strong> <span className="text-info-custom">{reportData.qrValue}</span>
+                    <strong className="text-info-custom-bold">QR:</strong> <span className="text-info-custom">{reportData.qrValue}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Nombre quien recibio:</strong> <span className="text-info-custom">{reportData.name}</span>
+                    <strong className="text-info-custom-bold">Nombre quien recibio:</strong> <span className="text-info-custom">{reportData.name}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Fecha:</strong> <span className="text-info-custom">{new Date(reportData.date).toLocaleString()}</span>
+                    <strong className="text-info-custom-bold">Fecha:</strong> <span className="text-info-custom">{new Date(reportData.date).toLocaleString()}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Descripción:</strong> <span className="text-info-custom">{reportData.description}</span>
+                    <strong className="text-info-custom-bold">Descripción:</strong> <span className="text-info-custom">{reportData.description}</span>
                   </div>
                 </div>
               ) : (

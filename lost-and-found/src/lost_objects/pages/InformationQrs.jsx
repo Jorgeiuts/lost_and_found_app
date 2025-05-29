@@ -81,16 +81,16 @@ export const InformationQrs = () => {
                 <div>
                   <h4 className="primary-txt-custom">Información del Objeto</h4>
                   <div className="mb-3">
-                    <strong className="text-info-custom">QR:</strong> <span className="text-info-custom">{objectData.qrValue}</span>
+                    <strong className="text-info-custom-bold">QR:</strong> <span className="text-info-custom">{objectData.qrValue}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Correo del propietario:</strong> <span className="text-info-custom">{objectData.userEmail}</span>
+                    <strong className="text-info-custom-bold">Correo del propietario:</strong> <span className="text-info-custom">{objectData.userEmail}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Objeto:</strong> <span className="text-info-custom">{objectData.name}</span>
+                    <strong className="text-info-custom-bold">Objeto:</strong> <span className="text-info-custom">{objectData.name}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom">Descripción del objeto:</strong> <span className="text-info-custom">{objectData.description}</span>
+                    <strong className="text-info-custom-bold">Descripción del objeto:</strong> <span className="text-info-custom">{objectData.description}</span>
                   </div>
                 </div>
               ) : (
