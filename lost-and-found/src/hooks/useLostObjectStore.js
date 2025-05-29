@@ -146,6 +146,19 @@ export const useLostObjectStore = ( ) => {
         }
     }
 
+    const startRegisterUser = async({ name, surname, email, password }) => {
+        try {
+            await lostAndFoundApi.post('/users', { name, surname, email, password });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al registrar usuario',
+                text: "No se pudo registrar el usuario. Por favor, inténtelo de nuevo más tarde.",
+                confirmButtonText: 'Aceptar'
+            });
+        }
+    }
+
     const startCancelScaan = () => {
         dispatch( onCancelScaan() );
     }
@@ -165,6 +178,7 @@ export const useLostObjectStore = ( ) => {
         startGenerateReport,
         startGetReport,
         startGetObjectInfo,
+        startRegisterUser
 
     }
 

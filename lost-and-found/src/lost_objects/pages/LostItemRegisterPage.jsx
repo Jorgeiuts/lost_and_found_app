@@ -12,7 +12,7 @@ const registerObjectForm = {
 const regiserObjectFormValidations = {
   registerName: [ (value) => value.length >= 1, 'El nombre del objeto es obligatorio' ],
   registerDescription: [ (value) => value.length >= 1, 'La descripcion del objeto es obligatoria' ],
-  registerEmail: [ (value) => value.includes('@liceodelvalle.edu.mx'), 'El correo electronico debe ser institucional' ],
+  registerEmail: [ (value) => value.includes('@'), 'El correo electronico debe ser institucional' ],
   registerQrValue: [ (value) => value.length === 36, 'El QR es obligatorio o esta incompleto' ] 
 }
 

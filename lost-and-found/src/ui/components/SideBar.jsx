@@ -34,6 +34,10 @@ export const SideBar = () => {
                 <img src="/assets/icons/icon_qr.png" alt="Generador de QR" className="icon-img" />
                 Generador de QRs
             </NavLink>
+            <NavLink to="/registerUser" className="nav-link mt-3">
+                <img src="/assets/icons/icon_user.png" alt="Registrar usuario" className="icon-img" />
+                Registrar usuario
+            </NavLink>
         </nav>
         <button 
             onClick={onLogout}
