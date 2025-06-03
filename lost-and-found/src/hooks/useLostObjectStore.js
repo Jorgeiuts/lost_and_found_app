@@ -113,7 +113,7 @@ export const useLostObjectStore = ( ) => {
 
     const startGetReport = async( qrValue ) => {
         try {
-            const { data } = await lostAndFoundApi.get(`/reports/${qrValue}`);
+            const { data } = await lostAndFoundApi.get(`/reports/QR/${qrValue}`);
             const { content } = data;
     
             if (Array.isArray(content) && content.length > 0) {
