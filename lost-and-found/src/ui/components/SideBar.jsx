@@ -28,7 +28,7 @@ export const SideBar = () => {
             </NavLink>
             <NavLink to="/information" className="nav-link mt-3">
                 <img src="/assets/icons/icon_search.png" alt="Buscador de QR" className="icon-img" />
-                Informacion QRs
+                Información QRs
             </NavLink>
             <NavLink to="/QRgenerator" className="nav-link mt-3">
                 <img src="/assets/icons/icon_qr.png" alt="Generador de QR" className="icon-img" />

@@ -10,10 +10,10 @@ const registerObjectForm = {
 }
 
 const regiserObjectFormValidations = {
-  registerName: [ (value) => value.length >= 1, 'El nombre del objeto es obligatorio' ],
-  registerDescription: [ (value) => value.length >= 1, 'La descripcion del objeto es obligatoria' ],
-  registerEmail: [ (value) => value.includes('@'), 'El correo electronico debe ser institucional' ],
-  registerQrValue: [ (value) => value.length === 36, 'El QR es obligatorio o esta incompleto' ] 
+  registerName: [ (value) => value.length >= 1, 'El nombre del objeto es obligatorio.' ],
+  registerDescription: [ (value) => value.length >= 1, 'La descripción del objeto es obligatoria.' ],
+  registerEmail: [ (value) => value.includes('@'), 'El correo electrónico debe ser institucional.' ],
+  registerQrValue: [ (value) => value.length === 36, 'El QR es obligatorio o está incompleto.' ] 
 }
 
 export const LostItemRegisterPage = () => {
@@ -34,7 +34,7 @@ export const LostItemRegisterPage = () => {
     if (!isFormValid) {
       Swal.fire({
         title: 'Error',
-        text: 'Por favor complete todos los campos correctamente.',
+        text: 'Por favor, complete todos los campos correctamente.',
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
@@ -49,7 +49,7 @@ export const LostItemRegisterPage = () => {
     });
     Swal.fire({
       title: '¡Registro exitoso!',
-      text: 'Registro de objeto generado con exito',
+      text: 'Registro de objeto generado con éxito.',
       icon: 'success',
       confirmButtonText: 'Aceptar'
     });
@@ -66,7 +66,7 @@ export const LostItemRegisterPage = () => {
             <div className="card-body d-flex flex-column flex-grow-1">
               <h1 className="primary-txt-custom text-start">Registro de nuevo objeto:</h1>
               <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-                <p className="text-info-custom">Porfavor complete los campos con la informacion requerida:</p>
+                <p className="text-info-custom">Por favor, complete los campos con la información requerida:</p>
                 <form className="w-100" onSubmit={ registerSubmit }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                       <div className="d-flex align-items-center w-100">
@@ -87,7 +87,7 @@ export const LostItemRegisterPage = () => {
                       <input 
                         type="text" 
                         className={`hbox ${ registerDescriptionValid && formSubmitted ? 'is-invalid' : '' }`} 
-                        placeholder="Descripcion del objeto" 
+                        placeholder="Descripción del objeto" 
                         name="registerDescription"
                         value={ registerDescription }
                         onChange={ onInputChange }
@@ -100,7 +100,7 @@ export const LostItemRegisterPage = () => {
                       <input 
                         type="text" 
                         className={`hbox ${ registerEmailValid && formSubmitted ? 'is-invalid' : '' }`} 
-                        placeholder="Correo electronico"
+                        placeholder="Correo electrónico"
                         name="registerEmail"
                         value={ registerEmail }
                         onChange={ onInputChange }
@@ -113,7 +113,7 @@ export const LostItemRegisterPage = () => {
                       <input 
                         type="text" 
                         className={`hbox ${ registerQrValueValid && formSubmitted ? 'is-invalid' : '' }`}  
-                        placeholder="Escanea aqui el QR" 
+                        placeholder="Escanea aquí el QR" 
                         name="registerQrValue"
                         value={ registerQrValue }
                         onChange={ onInputChange }

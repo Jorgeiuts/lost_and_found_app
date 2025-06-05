@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useForm, useLostObjectStore } from '../../hooks';
+import Swal from 'sweetalert2';
 
 const reportForm = {
     nameWhoReceive: '',
 }
 
 const reportFormValidations = {
-    nameWhoReceive: [ (value) => value.length >= 1, 'Porfavor ingresa un nombre' ],
+    nameWhoReceive: [ (value) => value.length >= 1, 'Por favor, ingresa un nombre.' ],
 }
 
 export const ReportGeneratorPage = () => {
@@ -22,7 +23,7 @@ export const ReportGeneratorPage = () => {
     if (!isFormValid) {
         Swal.fire({
         title: 'Error',
-        text: 'Porfavor ingrese un nombre valido',
+        text: 'Por favor, ingresa un nombre válido.',
         icon: 'error',
         confirmButtonText: 'Aceptar'
         })
@@ -42,7 +43,7 @@ export const ReportGeneratorPage = () => {
             <div className="card-body d-flex flex-column flex-grow-1">
               <h1 className="primary-txt-custom text-start">Generar reporte de objeto entregado:</h1>
               <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-                <p className="text-info-custom">Por favro validar los campos y llenar el nombre de quien recibe:</p>
+                <p className="text-info-custom">Por favor, valida los campos y llena el nombre de quien recibe:</p>
                 <form className="w-100 card-body" onSubmit={ onSubmitReport }>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                     <div className="d-flex align-items-center w-100">
@@ -57,7 +58,7 @@ export const ReportGeneratorPage = () => {
                       />
                       <i className="bi bi-qr-code-scan fs-4 text-primary ms-2"></i>
                     </div>
-                    { nameWhoReceiveValid && formSubmitted && <small className='invalid-feedback'>{ nameWhoReceiveValid }</small> }
+                    { nameWhoReceiveValid && formSubmitted && <small className="invalid-feedback">{ nameWhoReceiveValid }</small> }
                     <div className="d-flex align-items-center w-100">
                       <img className="icons me-2" src="/assets/icons/icon_docs.png" alt="" />
                       <input 
@@ -75,7 +76,7 @@ export const ReportGeneratorPage = () => {
                       <input 
                         type="text" 
                         className="hbox"
-                        placeholder="Descripcion del objeto"
+                        placeholder="Descripción del objeto"
                         value={ lostObjects?.description } 
                         name="objectDescription"
                         readOnly

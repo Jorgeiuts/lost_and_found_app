@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useForm, useLostObjectStore } from "../../hooks"
+import { useForm, useLostObjectStore } from "../../hooks";
+import Swal from "sweetalert2";
 
 const qrForm = {
   scaanQrValue: '',
 }
 
 const scaanQrCodeFormValidations = {
-  scaanQrValue: [ (value) => value.length === 36, 'Porfavor ingresa un codigo qr valido' ],
+  scaanQrValue: [ (value) => value.length === 36, 'Por favor, ingresa un código QR válido.' ],
 }
 
 export const ReportObjectPage = () => {
@@ -22,7 +23,7 @@ export const ReportObjectPage = () => {
     if (!isFormValid) {
       Swal.fire({
         title: 'Error',
-        text: 'Por favor ingrese un codigo QR valido',
+        text: 'Por favor, ingresa un código QR válido.',
         icon: 'error',
         confirmButtonText: 'Aceptar'
       })
@@ -46,15 +47,15 @@ export const ReportObjectPage = () => {
         <div className="col">
           <div className="card shadow-lg rounded">
             <form className="card-body" onSubmit={onSubmit}>
-            <h3 className="primary-txt-custom">Busqueda de reportes</h3>
-            <p className="text-info-custom">Por favor escanea el código QR en el siguiente espacio:</p>
+            <h3 className="primary-txt-custom">Búsqueda de reportes</h3>
+            <p className="text-info-custom">Por favor, escanea el código QR en el siguiente espacio:</p>
               <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                 <div className="d-flex align-items-center w-100">
                   <img className="icons" src="/assets/icons/icon_qr.png" alt="" />
                   <input 
                     type="text" 
                     className={`hbox ${ scaanQrValueValid && formSubmitted ? 'is-invalid' : '' }`}
-                    placeholder="Escanear aquí el código QR" 
+                    placeholder="Escanea aquí el código QR" 
                     name="scaanQrValue"
                     value={ scaanQrValue }
                     onChange={ onInputChange }
@@ -79,12 +80,12 @@ export const ReportObjectPage = () => {
             <div className="card-body d-flex flex-column">
               {reportData ? (
                 <div>
-                  <h4 className="primary-txt-custom">Información del Reporte</h4>
+                  <h4 className="primary-txt-custom">Información del reporte</h4>
                   <div className="mb-3">
                     <strong className="text-info-custom-bold">QR:</strong> <span className="text-info-custom">{reportData.qrValue}</span>
                   </div>
                   <div className="mb-3">
-                    <strong className="text-info-custom-bold">Nombre quien recibio:</strong> <span className="text-info-custom">{reportData.name}</span>
+                    <strong className="text-info-custom-bold">Nombre de quien recibió:</strong> <span className="text-info-custom">{reportData.name}</span>
                   </div>
                   <div className="mb-3">
                     <strong className="text-info-custom-bold">Fecha:</strong> <span className="text-info-custom">{new Date(reportData.date).toLocaleString()}</span>

@@ -8,7 +8,7 @@ const scaanQrCodeForm = {
 }
 
 const scaanQrCodeFormValidations = {
-  scaanQrValue: [ (value) => value.length === 36, 'Porfavor ingresa un codigo qr valido' ],
+  scaanQrValue: [ (value) => value.length === 36, 'Por favor, ingresa un código QR válido.' ],
 }
 
 export const HomePage = () => {
@@ -25,7 +25,7 @@ export const HomePage = () => {
     if (!isFormValid) {
       Swal.fire({
         title: 'Error',
-        text: 'Por favor ingrese un codigo QR valido',
+        text: 'Por favor, ingresa un código QR válido.',
         icon: 'error',
         confirmButtonText: 'Aceptar'
       })
@@ -52,8 +52,8 @@ export const HomePage = () => {
         <div className="col">
           <div className="card shadow-lg rounded">
             <div className="card-body text-center">
-              <h1 className="primary-txt-custom">¡Bienvenido!, { user?.name || 'Usuario' }</h1>
-              <p className="text-info-custom">Gestiona los objetos perdidos de forma rápida y eficiente</p>
+              <h1 className="primary-txt-custom">¡Bienvenido{user?.name ? `, ${user.name}` : ''}!</h1>
+              <p className="text-info-custom">Gestiona los objetos perdidos de forma rápida y eficiente.</p>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export const HomePage = () => {
           <div className="card shadow-lg rounded h-100 d-flex flex-column">
             <div className="card-body d-flex flex-column">
               <h3 className="primary-txt-custom">Escanea el código QR:</h3>
-              <p className="text-info-custom">Por favor escanea el código QR en el siguiente espacio:</p>
+              <p className="text-info-custom">Por favor, escanea el código QR en el siguiente espacio:</p>
               <form onSubmit={ scaanQrCodeSubmit } className="card-body">
                 <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                   <div className="d-flex align-items-center w-100">
@@ -71,7 +71,7 @@ export const HomePage = () => {
                     <input 
                       type="text" 
                       className={`hbox ${ scaanQrValueValid && formSubmitted ? 'is-invalid' : '' }`}
-                      placeholder="Escanear aquí el código QR" 
+                      placeholder="Escanea aquí el código QR" 
                       name="scaanQrValue"
                       value={ scaanQrValue }
                       onChange={ onInputChange }

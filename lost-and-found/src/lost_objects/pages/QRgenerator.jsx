@@ -83,7 +83,7 @@ export const QRgenerator = () => {
         <div className="col">
           <div className="card">
             <div className="card-body">
-              <p className="text-info-custom">Por favor digite la cantidad de QR que necesites generar:</p>
+              <p className="text-info-custom">Por favor, ingresa la cantidad de códigos QR que necesitas generar:</p>
 
               <div className="input-wrapper d-flex align-items-center">
                 <img className="icons" src="/assets/icons/icon_qr.png" alt="" />

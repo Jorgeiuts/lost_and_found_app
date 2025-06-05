@@ -11,12 +11,12 @@ const addUserForm = {
 };
 
 const addUserFormValidations = {
-  userName: [ (value) => value.trim().length > 0, 'El nombre es obligatorio' ],
-  userLastName: [ (value) => value.trim().length > 0, 'Los apellidos son obligatorios' ],
-  userEmail: [ (value) => value.includes('@'), 'El correo electrónico no es válido' ],
-  userPassword: [ (value) => value.length >= 6, 'La contraseña debe tener al menos 6 caracteres' ],
+  userName: [ (value) => value.trim().length > 0, 'El nombre es obligatorio.' ],
+  userLastName: [ (value) => value.trim().length > 0, 'Los apellidos son obligatorios.' ],
+  userEmail: [ (value) => value.includes('@'), 'El correo electrónico no es válido.' ],
+  userPassword: [ (value) => value.length >= 6, 'La contraseña debe tener al menos 6 caracteres.' ],
   userPasswordRepeat: [
-    (value, form) => value === form.userPassword, 'Las contraseñas no coinciden'
+    (value, form) => value === form.userPassword, 'Las contraseñas no coinciden.'
   ]
 };
 
@@ -36,7 +36,7 @@ export const AddUserPage = () => {
     if (!isFormValid) {
       Swal.fire({
         title: 'Error',
-        text: 'Por favor complete todos los campos correctamente.',
+        text: 'Por favor, complete todos los campos correctamente.',
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });
@@ -68,7 +68,7 @@ export const AddUserPage = () => {
             <div className="card-body d-flex flex-column flex-grow-1">
               <h1 className="primary-txt-custom text-start">Agregar nuevo usuario:</h1>
               <div className="d-flex flex-column flex-grow-1 justify-content-center align-items-center">
-                <p className="text-info-custom">Por favor complete los campos con la información requerida:</p>
+                <p className="text-info-custom">Por favor, complete los campos con la información requerida:</p>
                 <form className="w-100" onSubmit={registerUserSubmit}>
                   <div className="input-wrapper d-flex flex-column align-items-start p-3 bg-light rounded border gap-3">
                     <div className="d-flex align-items-center w-100">
@@ -102,7 +102,7 @@ export const AddUserPage = () => {
                       <input
                         type="email"
                         className={`hbox ${userEmailValid && formSubmitted ? 'is-invalid' : ''}`}
-                        placeholder="Correo del usuario"
+                        placeholder="Correo electrónico del usuario"
                         name="userEmail"
                         value={userEmail}
                         onChange={onInputChange}
